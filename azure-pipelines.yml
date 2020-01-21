@@ -11,15 +11,13 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  nugetApiKey: 'oy2ffxowd5sfnarduoyqvp6sm7xmqqnermdt6cek2m2uve'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Build $(buildConfiguration)'
 - script: dotnet test Test.Ssin.Belgium/Test.Ssin.Belgium.csproj
   displayName: 'Run UTs'
-- task: NuGetCommand@2
-  inputs:
-    command: pack
-    packagesToPack: Ssin.Belgium/Ssin.Belgium.csproj
-  displayName: 'Create nuget package'
+- script: dotnet nuget push -s https://www.nuget.org -k $(nugetApiKey) --skip-duplicate Ssin.Belgium/bin/Release/*.nupkg
+  displayName: 'Push nuget to nuget.org'
   
