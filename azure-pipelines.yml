@@ -17,4 +17,9 @@ steps:
   displayName: 'Build $(buildConfiguration)'
 - script: dotnet test Test.Ssin.Belgium/Test.Ssin.Belgium.csproj
   displayName: 'Run UTs'
+- task: NuGetCommand@2
+  inputs:
+    command: pack
+    packagesToPack: Ssin.Belgium/Ssin.Belgium.csproj
+  displayName: 'Create nuget package'
   
