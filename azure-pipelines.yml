@@ -21,7 +21,7 @@ steps:
   displayName: 'Build $(buildConfiguration)'
 - script: dotnet test Test.Ssin.Belgium/Test.Ssin.Belgium.csproj
   displayName: 'Run UTs'
-- script: echo $NUGETAPIKEY
+- script: echo $(NUGETAPIKEY)
   displayName: 'Debug Api key'
-- script: dotnet nuget push -s https://www.nuget.org -k $NUGETAPIKEY --skip-duplicate Ssin.Belgium/bin/Release/*.nupkg
+- script: dotnet nuget push -s https://www.nuget.org -k $(NUGETAPIKEY) --skip-duplicate Ssin.Belgium/bin/Release/*.nupkg
   displayName: 'Push nuget to nuget.org'
