@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>This library consists in a Ssin type that can be used to represent belgian SSIN numbers. The struct contains parsing and validation methods.</Description>
+    <Authors>Guillaume Dujardin</Authors>
+    <Company>Poney Musical</Company>
+    <Copyright>Guillaume Dujardin</Copyright>
+    <PackageProjectUrl>https://github.com/poneymusical/ssin-belgium</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/poneymusical/ssin-belgium</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
