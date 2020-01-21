@@ -18,6 +18,16 @@ namespace Test.Ssin.Belgium
             ssin = new global::Ssin.Belgium.Ssin(42, 01, 22, 051, 81);
             Assert.IsTrue(ssin.IsValid());
         }
+
+        [Test]
+        public void TestStaticIsValid()
+        {
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.IsValid("88101135767"));
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.IsValid("88.10.11-357.67"));
+            Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("88.10.11-357/67"));
+            Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("881011357678"));
+            Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("88101135768"));
+        }
         
         [Test]
         public void TestParse()
@@ -58,6 +68,20 @@ namespace Test.Ssin.Belgium
 
             Assert.IsTrue(global::Ssin.Belgium.Ssin.TryParse("88.10.11-357.67", out actual));
             Assert.AreEqual(expected, actual);
+
+            Assert.IsFalse(global::Ssin.Belgium.Ssin.TryParse("invalid", out actual));
+            Assert.AreEqual(default(global::Ssin.Belgium.Ssin), actual);
+        }
+
+        [Test]
+        public void TestTryParseExact()
+        {
+            var expected = new global::Ssin.Belgium.Ssin(88, 10, 11, 357, 67);
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.TryParseExact("88101135767", out var actual, SsinFormat.Raw));
+            Assert.AreEqual(expected, actual);
+
+            Assert.IsFalse(global::Ssin.Belgium.Ssin.TryParseExact("88101135767", out actual, SsinFormat.Formatted));
+            Assert.AreEqual(default(global::Ssin.Belgium.Ssin), actual);
         }
     }
 }
