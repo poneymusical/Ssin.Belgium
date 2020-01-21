@@ -15,6 +15,6 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Build $(buildConfiguration)'
-- script: dotnet test Test.Ssin.Belgium\Test.Ssin.Belgium.csproj
+- script: dotnet test Test.Ssin.Belgium/Test.Ssin.Belgium.csproj
   displayName: 'Run UTs'
   
