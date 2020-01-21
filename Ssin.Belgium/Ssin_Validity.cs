@@ -4,8 +4,26 @@ namespace Ssin.Belgium
 {
     public partial struct Ssin
     {
+        /// <summary>
+        /// Returns a boolean value that indicates whether the current object represents a valid SSIN.
+        /// </summary>
+        /// <returns>true if the current Ssin represents a valid SSIN, false otherwise</returns>
         public bool IsValid()
             => IsDatePartValid() && IsRegistrationIndexValid() && IsControlValid();
+
+        /// <summary>
+        /// Returns a boolean value that indicates whether the string representation of a SSIN represents a valid SSIN.
+        /// </summary>
+        /// <returns>true if <paramref name="ssin"/> represents a valid SSIN, false otherwise</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="ssin"/> is null.</exception>
+        public static bool IsValid(string ssin)
+        {
+            if (null == ssin)
+                throw new ArgumentNullException(nameof(ssin));
+
+            return TryParse(ssin, out var parsed) && parsed.IsValid();
+        }
+
 
         private bool IsDatePartValid()
         {
@@ -80,10 +98,5 @@ namespace Ssin.Belgium
 
         private static long ComputeControlFromComposite(long composite)
             => 97 - (composite % 97);
-
-
-        public static bool IsValid(string ssin)
-            => TryParse(ssin, out var parsed) && parsed.IsValid();
-
     }
 }

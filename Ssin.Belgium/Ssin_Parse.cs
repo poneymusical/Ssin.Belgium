@@ -6,22 +6,69 @@ namespace Ssin.Belgium
 {
     public partial struct Ssin
     {
+        /// <summary>
+        /// Converts the string representation of a SSIN to its Ssin object equivalent.
+        /// </summary>
+        /// <param name="source">A string that contains a SSIN to convert.</param>
+        /// <returns>An object that is equivalent to the SSIN contained in <paramref name="source"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
+        /// <exception cref="FormatException"><paramref name="source"/> does not contain a valid string representation of a SSIN.</exception>
         public static Ssin Parse(string source)
-            => TryParse(source, out var ssin)
-                ? ssin
-                : throw new FormatException($"{0} is not a valid SSIN.");
+        {
+            if (null == source)
+                throw new ArgumentNullException(nameof(source));
 
+            return TryParse(source, out var ssin)
+                ? ssin
+                : throw new FormatException($"{source} is not a valid SSIN.");
+        }
+
+
+        /// <summary>
+        /// Converts the string representation of a SSIN to its Ssin object equivalent.
+        /// </summary>
+        /// <param name="source">A string that contains a SSIN to convert.</param>
+        /// <param name="format">A format specifier that defines the required format of <paramref name="source"/>.</param>
+        /// <returns>An object that is equivalent to the SSIN contained in <paramref name="source"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
+        /// <exception cref="FormatException"><paramref name="source"/> does not contain a valid string representation of a SSIN.</exception>
         public static Ssin ParseExact(string source, SsinFormat format)
-            => TryParseExact(source, out var ssin, format)
-                ? ssin
-                : throw new FormatException($"{0} is not a valid SSIN.");
+        {
+            if (null == source)
+                throw new ArgumentNullException(nameof(source));
 
+            return TryParseExact(source, out var ssin, format)
+                ? ssin
+                : throw new FormatException($"{source} is not a valid SSIN.");
+        }
+
+
+        /// <summary>
+        /// Converts the specified string representation of a SSIN to its Ssin object equivalent and returns a value that indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">A string that contains a SSIN to convert.</param>
+        /// <param name="parsed">When this method returns, contains the Ssin value equivalent to the SSIN contained in <paramref name="source"/>, if the conversion succeeded, or the default value if the conversion failed. The conversion fails if the <paramref name="source"/> parameter is null, is an empty string (""), or does not contain a valid string representation of a SSIN. This parameter is passed uninitialized.</param>
+        /// <returns>true if the <paramref name="source">s</paramref> parameter was converted successfully; otherwise, false.</returns>
         public static bool TryParse(string source, out Ssin parsed)
             => TryParseExact(source, out parsed, SsinFormat.Raw)
                || TryParseExact(source, out parsed, SsinFormat.Formatted);
 
+
+        /// <summary>
+        /// Converts the specified string representation of a SSIN to its Ssin object equivalent. The format of the string representation must match a specified format exactly. The method returns a value that indicates whether the conversion succeeded.
+        /// </summary>
+        /// <param name="source">A string that contains a SSIN to convert.</param>
+        /// <param name="parsed">When this method returns, contains the Ssin value equivalent to the SSIN contained in <paramref name="source"/>, if the conversion succeeded, or the default value if the conversion failed. The conversion fails if the <paramref name="source"/> parameter is null, is an empty string (""), , or does not contain a SSIN that correspond to the pattern specified in format. This parameter is passed uninitialized.</param>
+        /// <param name="format">A format specifier that defines the required format of <paramref name="source"/>.</param>
+        /// <returns>true if the <paramref name="source">s</paramref> parameter was converted successfully; otherwise, false.</returns>
         public static bool TryParseExact(string source, out Ssin parsed, SsinFormat format)
         {
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                parsed = default;
+                return false;
+            }
+
             var str = string.Copy(source);
 
             if (!CheckFormat(source, format))
@@ -49,14 +96,7 @@ namespace Ssin.Belgium
                 return false;
             }
 
-            parsed = new Ssin
-            {
-                Year = year,
-                Month = month,
-                Day = day,
-                RegistrationIndex = registrationIndex,
-                Control = control
-            };
+            parsed = new Ssin(year, month, day, registrationIndex, control);
             return true;
         }
 

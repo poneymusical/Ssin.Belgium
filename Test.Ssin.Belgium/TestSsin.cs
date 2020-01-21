@@ -53,8 +53,7 @@ namespace Test.Ssin.Belgium
         public void TestTryParse()
         {
             var expected = new global::Ssin.Belgium.Ssin(88, 10, 11, 357, 67);
-            global::Ssin.Belgium.Ssin actual = default;
-            Assert.IsTrue(global::Ssin.Belgium.Ssin.TryParse("88101135767", out actual));
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.TryParse("88101135767", out var actual));
             Assert.AreEqual(expected, actual);
 
             Assert.IsTrue(global::Ssin.Belgium.Ssin.TryParse("88.10.11-357.67", out actual));
