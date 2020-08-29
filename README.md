@@ -9,7 +9,6 @@ For more information on the structure of a belgian SSIN, please refer to [Wikipe
 
 **A word of caution:** as the validation process of a SSIN is somewhat complex and involves all its members, constructor and parsing methods only account for the global structure. This means that you can build or parse a value that looks like a SSIN (it has all the necessary members and does not contain invalid characters), but is not a valid SSIN (e.g. the control part does not match the rest of the SSIN). So be sure to use the validation methods as well!
 
-
 ## Compatibility
 
 The library targets .NET Standard 2.0. It has no external dependencies as it relies solely on basic stuff.
