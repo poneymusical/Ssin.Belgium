@@ -1,6 +1,6 @@
 # Ssin.Belgium
 
-[![Build Status](https://guhke.visualstudio.com/Ssin.Belgium/_apis/build/status/poneymusical.ssin-belgium?branchName=master)](https://guhke.visualstudio.com/Ssin.Belgium/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/guhke/Ssin.Belgium/_apis/build/status/Ssin.Belgium?branchName=master)](https://dev.azure.com/guhke/Ssin.Belgium/_build/latest?definitionId=9&branchName=master)
 
 This library consists in a `Ssin` type that can be used to represent belgian SSIN numbers. The struct contains parsing methods (`Parse` and `TryParse`, just like in base types) and validation methods.
 The library can handle SSIN for residents ("numéro de registre national") and non-residents ("numéro BIS").
