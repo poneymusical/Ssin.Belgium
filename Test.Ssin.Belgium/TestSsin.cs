@@ -11,11 +11,17 @@ namespace Test.Ssin.Belgium
         {
             var ssin = new global::Ssin.Belgium.Ssin(88, 10, 11, 357, 67);
             Assert.IsTrue(ssin.IsValid());
-
+            
             ssin = new global::Ssin.Belgium.Ssin(88, 10, 11, 358, 67);
             Assert.IsFalse(ssin.IsValid());
-
+            
             ssin = new global::Ssin.Belgium.Ssin(42, 01, 22, 051, 81);
+            Assert.IsTrue(ssin.IsValid());
+            
+            ssin = new global::Ssin.Belgium.Ssin(17, 10, 05, 114, 95);
+            Assert.IsTrue(ssin.IsValid());
+
+            ssin = new global::Ssin.Belgium.Ssin(00, 05, 24, 242, 72);
             Assert.IsTrue(ssin.IsValid());
         }
 
