@@ -44,14 +44,15 @@ namespace Ssin.Belgium
                 return false;
             
             //Date de naissance connue entièrement
-            if (Year > 0 && month > 0 && Day > 0)
+            if (Year >= 0 && month > 0 && Day > 0)
             {
                 try
                 {
-                    var _ = new DateTime(Year, month, Day);
+                    var year = Year > 0 ? Year : 2000; // Si l'année est 0, on considère que c'est 2000
+                    var _ = new DateTime(year, month, Day);
                     return true;
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException e)
                 {
                     return false;
                 }
