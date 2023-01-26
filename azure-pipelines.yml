@@ -22,4 +22,5 @@ steps:
 - script: dotnet test Test.Ssin.Belgium/Test.Ssin.Belgium.csproj
   displayName: 'Run UTs'
 - script: dotnet nuget push -s https://www.nuget.org -k $(NUGETAPIKEY) --skip-duplicate Ssin.Belgium/bin/Release/*.nupkg
+  condition: and(eq(variables['Agent.JobStatus'], 'Succeeded'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   displayName: 'Push nuget to nuget.org'
