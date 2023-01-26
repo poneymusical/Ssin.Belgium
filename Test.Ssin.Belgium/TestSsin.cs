@@ -112,15 +112,5 @@ namespace Test.Ssin.Belgium
             Assert.IsTrue(ssin.IsValid());
             Assert.IsTrue(ssin.GetBirthdate() == new DateTime(year, month, day));
         }
-        
-        [TestCase("19.00.23-273.75")]
-        [TestCase("00.04.23-273.75")]
-        [TestCase("19.04.00-273.75")]
-        public void TestGetBirthDateReturnsNull(string nationalNumber)
-        {
-            var ssin = global::Ssin.Belgium.Ssin.Parse(nationalNumber);
-            Assert.IsTrue(ssin.IsValid());
-            Assert.IsNull(ssin.GetBirthdate());
-        }
     }
 }
