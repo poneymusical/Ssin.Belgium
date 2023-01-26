@@ -10,7 +10,7 @@ namespace Ssin.Belgium
         /// <returns></returns>
         public DateTime? GetBirthdate()
         {
-            if (!IsDatePartValid())
+            if (!IsDateKnown())
             {
                 return null;
             }
@@ -18,6 +18,11 @@ namespace Ssin.Belgium
             var year = Year;
             year += (Is20XX()) ? 2000 : 1900;
             return new DateTime(year, GetMonth(), Day);
+        }
+
+        private bool IsDateKnown()
+        {
+            return (Year >= 0 && GetMonth() > 0 && Day > 0);
         }
 
         private int GetMonth()

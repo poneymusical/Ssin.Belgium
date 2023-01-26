@@ -41,7 +41,7 @@ namespace Ssin.Belgium
                 return false;
             
             //Date de naissance connue entièrement
-            if (Year >= 0 && month > 0 && Day > 0)
+            if (IsDateKnown())
             {
                 try
                 {
@@ -93,13 +93,13 @@ namespace Ssin.Belgium
 
         private long ComputeControlFor19XX()
         {
-            var composite = long.Parse($"{Year:D2}{GetMonth():D2}{Day:D2}{RegistrationIndex:D3}");
+            var composite = long.Parse($"{Year:D2}{Month:D2}{Day:D2}{RegistrationIndex:D3}");
             return ComputeControlFromComposite(composite);
         }
 
         private long ComputeControlFor20XX()
         {
-            var composite = long.Parse($"2{Year:D2}{GetMonth():D2}{Day:D2}{RegistrationIndex:D3}");
+            var composite = long.Parse($"2{Year:D2}{Month:D2}{Day:D2}{RegistrationIndex:D3}");
             return ComputeControlFromComposite(composite);
         }
 

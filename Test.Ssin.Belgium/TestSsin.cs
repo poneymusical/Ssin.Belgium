@@ -18,14 +18,6 @@ namespace Test.Ssin.Belgium
             ssin = new global::Ssin.Belgium.Ssin(42, 01, 22, 051, 81);
             Assert.IsTrue(ssin.IsValid());
             
-            // Numéro BIS + 20
-            ssin = new global::Ssin.Belgium.Ssin(42, 21, 22, 051, 81);
-            Assert.IsTrue(ssin.IsValid());
-            
-            // Numéro BIS + 40
-            ssin = new global::Ssin.Belgium.Ssin(42, 41, 22, 051, 81);
-            Assert.IsTrue(ssin.IsValid());
-            
             ssin = new global::Ssin.Belgium.Ssin(17, 10, 05, 114, 95);
             Assert.IsTrue(ssin.IsValid());
             
@@ -104,8 +96,6 @@ namespace Test.Ssin.Belgium
 
         [TestCase("88.10.11-357.67", SsinGender.Male)]
         [TestCase("87.09.29-253.88", SsinGender.Male)]
-        [TestCase("87.29.29-253.88", SsinGender.Male)]
-        [TestCase("87.49.29-253.88", SsinGender.Male)]
         public void TestGetGender(string nationalNumber, SsinGender genderEnum)
         {
             var ssin = global::Ssin.Belgium.Ssin.Parse(nationalNumber);
@@ -115,16 +105,22 @@ namespace Test.Ssin.Belgium
 
         [TestCase("88.10.11-357.67", 1988, 10, 11)]
         [TestCase("87.09.29-253.88", 1987, 09 ,29)]
-        [TestCase("87.29.29-253.88", 1987, 09 ,29)]
-        [TestCase("87.49.29-253.88", 1987, 09 ,29)]
         [TestCase("19.04.23-273.75", 2019, 04 ,23)]
-        [TestCase("19.24.23-273.75", 2019, 04 ,23)]
-        [TestCase("19.44.23-273.75", 2019, 04 ,23)]
         public void TestGetBirthDate(string nationalNumber, int year, int month, int day)
         {
             var ssin = global::Ssin.Belgium.Ssin.Parse(nationalNumber);
             Assert.IsTrue(ssin.IsValid());
             Assert.IsTrue(ssin.GetBirthdate() == new DateTime(year, month, day));
+        }
+        
+        [TestCase("19.00.23-273.75")]
+        [TestCase("00.04.23-273.75")]
+        [TestCase("19.04.00-273.75")]
+        public void TestGetBirthDateReturnsNull(string nationalNumber)
+        {
+            var ssin = global::Ssin.Belgium.Ssin.Parse(nationalNumber);
+            Assert.IsTrue(ssin.IsValid());
+            Assert.IsNull(ssin.GetBirthdate());
         }
     }
 }
