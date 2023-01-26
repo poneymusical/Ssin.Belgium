@@ -57,3 +57,18 @@ Several static parsing methods are available:
 Two validation methods are available:
 * `bool IsValid()`. 
 * Static `bool Ssin.IsValid(string ssin)` => this method allows you to quickly check a string SSIN. Handy!
+
+## Getting birth date
+You can get the user's birth date for the provided SSIN :
+* `DateTime GetBirthDate()`
+
+The method returns `null` if the date is unknown (no day or month or year).
+
+## Getting the user gender
+
+You may get the birth gender from the provided SSIN :
+* `SsinGender GetGender()`
+
+The method returns `null` if the gender is unknown, only if BIS number with +40 increment. Information is available [here](https://housinganywhere.com/Belgium/belgian-national-number/).
+
+> Note that this information is not 100% reliable because gender may have change but not the SSIN.

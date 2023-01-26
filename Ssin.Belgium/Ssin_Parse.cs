@@ -23,7 +23,6 @@ namespace Ssin.Belgium
                 : throw new FormatException($"{source} is not a valid SSIN.");
         }
 
-
         /// <summary>
         /// Converts the string representation of a SSIN to its Ssin object equivalent.
         /// </summary>
@@ -42,7 +41,6 @@ namespace Ssin.Belgium
                 : throw new FormatException($"{source} is not a valid SSIN.");
         }
 
-
         /// <summary>
         /// Converts the specified string representation of a SSIN to its Ssin object equivalent and returns a value that indicates whether the conversion succeeded.
         /// </summary>
@@ -52,8 +50,7 @@ namespace Ssin.Belgium
         public static bool TryParse(string source, out Ssin parsed)
             => TryParseExact(source, out parsed, SsinFormat.Raw)
                || TryParseExact(source, out parsed, SsinFormat.Formatted);
-
-
+        
         /// <summary>
         /// Converts the specified string representation of a SSIN to its Ssin object equivalent. The format of the string representation must match a specified format exactly. The method returns a value that indicates whether the conversion succeeded.
         /// </summary>

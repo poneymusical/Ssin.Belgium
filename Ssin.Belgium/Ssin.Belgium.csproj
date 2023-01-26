@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/poneymusical/ssin-belgium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/poneymusical/ssin-belgium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
 </Project>
