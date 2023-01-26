@@ -24,7 +24,6 @@ namespace Ssin.Belgium
             return TryParse(ssin, out var parsed) && parsed.IsValid();
         }
 
-
         private bool IsDatePartValid()
         {
             //Based on https://www.ibz.rrn.fgov.be/fileadmin/user_upload/fr/rn/instructions/liste-TI/TI000_Numerodidentification.pdf
@@ -35,9 +34,7 @@ namespace Ssin.Belgium
             if (Month > 52)
                 return false;
 
-            var month = Month;
-            while (month > 12)
-                month -= 20;
+            var month = GetMonth();
             
             //Si un nombre est négatif => invalide d'office
             if (Year < 0 || month < 0 || Day < 0)
@@ -52,7 +49,7 @@ namespace Ssin.Belgium
                     var _ = new DateTime(year, month, Day);
                     return true;
                 }
-                catch (ArgumentOutOfRangeException e)
+                catch (ArgumentOutOfRangeException)
                 {
                     return false;
                 }
@@ -79,21 +76,30 @@ namespace Ssin.Belgium
         {
             //Rule changes according to century of birth, but processes are inexpensive
             //so we can always compute them both instead of trying to guess which rule should be used
-            var control19XX = ComputeControlFor19XX();
-            var control20XX = ComputeControlFor20XX();
+            return Is19XX() || Is20XX();
+        }
 
-            return control20XX == Control || control19XX == Control;
+        private bool Is19XX()
+        {
+            var control19XX = ComputeControlFor19XX();
+            return control19XX == Control;
+        }
+
+        private bool Is20XX()
+        {
+            var control20XX = ComputeControlFor20XX();
+            return control20XX == Control;
         }
 
         private long ComputeControlFor19XX()
         {
-            var composite = long.Parse($"{Year:D2}{Month:D2}{Day:D2}{RegistrationIndex:D3}");
+            var composite = long.Parse($"{Year:D2}{GetMonth():D2}{Day:D2}{RegistrationIndex:D3}");
             return ComputeControlFromComposite(composite);
         }
 
         private long ComputeControlFor20XX()
         {
-            var composite = long.Parse($"2{Year:D2}{Month:D2}{Day:D2}{RegistrationIndex:D3}");
+            var composite = long.Parse($"2{Year:D2}{GetMonth():D2}{Day:D2}{RegistrationIndex:D3}");
             return ComputeControlFromComposite(composite);
         }
 

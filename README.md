@@ -57,3 +57,8 @@ Several static parsing methods are available:
 Two validation methods are available:
 * `bool IsValid()`. 
 * Static `bool Ssin.IsValid(string ssin)` => this method allows you to quickly check a string SSIN. Handy!
+
+## Getting information
+You can get several information extracted for SSN :
+* `DateTime GetBirthDate()`
+* `SsinGender GetGender()`

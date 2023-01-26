@@ -10,7 +10,6 @@ namespace Ssin.Belgium
         public int RegistrationIndex { get; set; }
         public int Control { get; set; }
 
-
         /// <summary>
         /// Default ctor.
         /// </summary>
@@ -28,14 +27,12 @@ namespace Ssin.Belgium
             Control = control;
         }
 
-
         /// <summary>
         /// Returns the SSIN in a human-readable format.
         /// </summary>
         /// <returns>The SSIN as a string, formatted as "12345678901".</returns>
         public override string ToString() 
             => ToString(SsinFormat.Raw);
-
 
         /// <summary>
         /// Returns the SSIN in a human-readable format. The output depends on the specified format.
