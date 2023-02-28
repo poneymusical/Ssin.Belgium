@@ -2,6 +2,8 @@
 
 namespace Ssin.Belgium
 {
+    
+    
     public partial struct Ssin
     {
         /// <summary>
@@ -24,6 +26,8 @@ namespace Ssin.Belgium
             return TryParse(ssin, out var parsed) && parsed.IsValid();
         }
 
+        private bool IsBis() => Month > 20;
+
         private bool IsDatePartValid()
         {
             //Based on https://www.ibz.rrn.fgov.be/fileadmin/user_upload/fr/rn/instructions/liste-TI/TI000_Numerodidentification.pdf
@@ -35,11 +39,11 @@ namespace Ssin.Belgium
                 return false;
 
             var month = GetMonth();
-            
+
             //Si un nombre est négatif => invalide d'office
             if (Year < 0 || month < 0 || Day < 0)
                 return false;
-            
+
             //Date de naissance connue entièrement
             if (IsDateKnown())
             {
@@ -69,7 +73,9 @@ namespace Ssin.Belgium
         private bool IsRegistrationIndexValid()
         {
             //De 001 à 997 pour les hommes, de 002 à 998 pour les femmes 
-            return RegistrationIndex > 0 && RegistrationIndex < 998;
+            return IsBis()
+                ? RegistrationIndex >= 0 && RegistrationIndex <= 999
+                : RegistrationIndex > 0 && RegistrationIndex < 998;
         }
 
         private bool IsControlValid()
