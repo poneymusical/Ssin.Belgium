@@ -37,6 +37,14 @@ namespace Test.Ssin.Belgium
             Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("881011357678"));
             Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("88101135768"));
             Assert.IsFalse(global::Ssin.Belgium.Ssin.IsValid("84.03.27-057.94"));
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.IsValid("99501600009"));
+        }
+
+        [Test]
+        [TestCaseSource(typeof(SsinSamplingSet), nameof(SsinSamplingSet.SsinList))]
+        public void TestSamplingSet(string ssin)
+        {
+            Assert.IsTrue(global::Ssin.Belgium.Ssin.IsValid(ssin));
         }
 
         [Test]
