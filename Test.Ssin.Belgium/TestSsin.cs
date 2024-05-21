@@ -128,5 +128,12 @@ namespace Test.Ssin.Belgium
             var ssin = global::Ssin.Belgium.Ssin.Parse(nationalNumber);
             Assert.IsNull(ssin.GetBirthdate());
         }
+
+        [Test]
+        public void TestUnknownBirthDateIsValid()
+        {
+            var ssin = new global::Ssin.Belgium.Ssin(00, 00, 01, 397, 87);
+            Assert.IsTrue(ssin.IsValid());
+        }
     }
 }

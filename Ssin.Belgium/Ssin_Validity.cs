@@ -60,7 +60,7 @@ namespace Ssin.Belgium
             }
 
             //Date de naissance totalement inconnue : Year = 0, Month = 0, Day = 1
-            if (Year == 0 && month == 0 && Day > 1)
+            if (Year == 0 && month == 0 && Day == 1)
                 return true;
 
             //On connaît juste l'année ou juste l'année et le mois de naissance : Year > 0, Month = 0, Day >= 0
