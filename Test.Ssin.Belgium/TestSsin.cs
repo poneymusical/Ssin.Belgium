@@ -129,11 +129,12 @@ namespace Test.Ssin.Belgium
             Assert.IsNull(ssin.GetBirthdate());
         }
 
-        [Test]
-        public void TestUnknownBirthDateIsValid()
+        [TestCase("00000139787")]
+        [TestCase("00000081983")]
+        public void TestUnknownBirthDateIsValid(string bisNumber)
         {
-            var ssin = new global::Ssin.Belgium.Ssin(00, 00, 01, 397, 87);
-            Assert.IsTrue(ssin.IsValid());
+            var bis = global::Ssin.Belgium.Ssin.Parse(bisNumber);
+            Assert.IsTrue(bis.IsValid());
         }
     }
 }
